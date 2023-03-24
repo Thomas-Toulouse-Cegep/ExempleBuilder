@@ -1,7 +1,4 @@
-﻿using System.Runtime.InteropServices;
-using static Program;
-
-public class Program
+﻿public class Program
 {
     // notre interface qui va nous permettre de définir nos sandwichs
     public interface ISandwich
