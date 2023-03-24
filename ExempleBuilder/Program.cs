@@ -91,7 +91,7 @@ public class Program
             sandwichBuilder.SetMeat("Turkey");
             sandwichBuilder.SetCheese("Cheddar");
             sandwichBuilder.SetVegetables(new List<string>() { "Lettuce", "Tomato" });
-            sandwichBuilder.SetCondiments(new List<string>() { "Mayo", "Mustard" });
+            sandwichBuilder.SetCondiments(new List<string>() { "Mayo", "Ketchup" });
         }
 
         public void makesan(ISandwich sandwichBuilder)
@@ -100,13 +100,13 @@ public class Program
         }
     }
 
-    private static void Main(string[] args, SandwichMaker sandwichMaker)
+    private static void Main(string[] args)
     {
-        //var sandwichMaker = new SandwichMaker();
+        var sandwichMaker = new SandwichMaker();
         var JambonSandwichBuilder = new JambonSandwichBuilder();
         sandwichMaker.MakeSandwich(JambonSandwichBuilder);
         var sandwich = JambonSandwichBuilder.GetSandwich();
-        var i = sandwichMaker.makesan();
+
         Console.WriteLine("Turkey sandwich:");
         Console.WriteLine($"Bread: {sandwich.Bread}");
         Console.WriteLine($"Meat: {sandwich.Meat}");
