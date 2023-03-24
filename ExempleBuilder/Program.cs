@@ -140,7 +140,7 @@
         }
     }
 
-    public class SandwichMaker
+    public class Cook
     {
         // il y a plusieur méthode de le définir
         public void MakeSandwich(ISandwich sandwichBuilder)
