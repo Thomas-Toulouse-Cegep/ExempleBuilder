@@ -164,7 +164,7 @@
 
     private static void Main(string[] args)
     {
-        var sandwichMaker = new SandwichMaker();
+        var sandwichMaker = new Cook();
         var SandwichBuilder = new SandwichBuilder();
         sandwichMaker.MakeSandwich(SandwichBuilder);
         sandwichMaker.MakeSandwich2(SandwichBuilder);
