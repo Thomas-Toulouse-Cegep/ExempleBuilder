@@ -15,7 +15,7 @@
 
         public ISandwich withHam();
 
-        public ISandwich withCheedar();
+        public ISandwich withCheddar();
 
         public ISandwich withTomato();
 
@@ -113,9 +113,9 @@
             return this;
         }
 
-        public ISandwich withCheedar()
+        public ISandwich withCheddar()
         {
-            sandwich2.Cheese = "cheedar";
+            sandwich2.Cheese = "Cheddar";
 
             return this;
         }
@@ -158,7 +158,7 @@
         public void MakeSandwich2(ISandwich sandwichBuilder)
         {
             // ou un peux utiliser des fonctions qui retourne des les élements du sandwich
-            sandwichBuilder.withWhiteBread().withHam().withCheedar().withTomato().withMayo().withKetchup();
+            sandwichBuilder.withWhiteBread().withHam().withCheddar().withTomato().withMayo().withKetchup();
         }
     }
 
