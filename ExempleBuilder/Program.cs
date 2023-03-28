@@ -3,31 +3,24 @@
     // notre interface qui va nous permettre de définir nos sandwichs
     public interface ISandwich
     {
-        void SetBread(string bread);
-
-        void SetMeat(string meat);
-
-        void SetCheese(string cheese);
-
-        void SetVegetables(List<string> vegetables);
-
+        //méthode 2
         public ISandwich withWhiteBread();
 
         public ISandwich withHam();
+
+        public ISandwich withTurkey();
 
         public ISandwich withCheddar();
 
         public ISandwich withTomato();
 
+        public ISandwich withOnions();
+
         public ISandwich withMayo();
 
         public ISandwich withKetchup();
 
-        void SetCondiments(List<string> condiments);
-
         Sandwich GetSandwich();
-
-        Sandwich GetSandwich2();
     }
 
     // pour les get set
@@ -51,42 +44,8 @@
     public class SandwichBuilder : ISandwich
     {
         // ce qui vas nous permettre de construire le sandwich
-        private Sandwich sandwich;
 
-        private Sandwich sandwich2;
-
-        public SandwichBuilder()
-        {
-            sandwich = new Sandwich();
-            sandwich2 = new Sandwich();
-        }
-
-        // méthode 1 pour construction de sandwich
-
-        public void SetBread(string bread)
-        {
-            sandwich.Bread = bread;
-        }
-
-        public void SetMeat(string meat)
-        {
-            sandwich.Meat = meat;
-        }
-
-        public void SetCheese(string cheese)
-        {
-            sandwich.Cheese = cheese;
-        }
-
-        public void SetVegetables(List<string> vegetables)
-        {
-            sandwich.Vegetables = vegetables;
-        }
-
-        public void SetCondiments(List<string> condiments)
-        {
-            sandwich.Condiments = condiments;
-        }
+        private Sandwich sandwich = new Sandwich();
 
         public Sandwich GetSandwich()
         {
@@ -95,47 +54,123 @@
 
         // méthode 2 pour construction de sandwich
 
-        public Sandwich GetSandwich2()
-        {
-            return sandwich2;
-        }
-
         public ISandwich withWhiteBread()
         {
-            sandwich2.Bread = "white bread";
+            sandwich.Bread = "white bread";
             return this;
         }
 
         public ISandwich withHam()
         {
-            sandwich2.Meat = "ham";
+            sandwich.Meat = "ham";
 
             return this;
         }
 
         public ISandwich withCheddar()
         {
-            sandwich2.Cheese = "Cheddar";
+            sandwich.Cheese = "Cheddar";
 
             return this;
         }
 
         public ISandwich withTomato()
         {
-            sandwich2.Vegetables.Add("Onions");
+            sandwich.Vegetables.Add("Tomato");
 
             return this;
         }
 
         public ISandwich withMayo()
         {
-            sandwich2.Condiments.Add("Mayo");
+            sandwich.Condiments.Add("Mayo");
             return this;
         }
 
         public ISandwich withKetchup()
         {
-            sandwich2.Condiments.Add("Ketchup");
+            sandwich.Condiments.Add("Ketchup");
+            return this;
+        }
+
+        public ISandwich withTurkey()
+        {
+            sandwich.Meat = "Turkey";
+
+            return this;
+        }
+
+        public ISandwich withOnions()
+        {
+            sandwich.Vegetables.Add("Onions");
+
+            return this;
+        }
+    }
+
+    public class SandwichBuilder2 : ISandwich
+    {
+        // ce qui vas nous permettre de construire le sandwich
+
+        private Sandwich sandwich = new Sandwich();
+
+        public Sandwich GetSandwich()
+        {
+            return sandwich;
+        }
+
+        // méthode 2 pour construction de sandwich
+
+        public ISandwich withWhiteBread()
+        {
+            sandwich.Bread = "white bread";
+            return this;
+        }
+
+        public ISandwich withHam()
+        {
+            sandwich.Meat = "ham";
+
+            return this;
+        }
+
+        public ISandwich withCheddar()
+        {
+            sandwich.Cheese = "Cheddar";
+
+            return this;
+        }
+
+        public ISandwich withOnions()
+        {
+            sandwich.Vegetables.Add("Onions");
+
+            return this;
+        }
+
+        public ISandwich withMayo()
+        {
+            sandwich.Condiments.Add("Mayo");
+            return this;
+        }
+
+        public ISandwich withKetchup()
+        {
+            sandwich.Condiments.Add("Ketchup");
+            return this;
+        }
+
+        public ISandwich withTurkey()
+        {
+            sandwich.Meat = "Turkey";
+
+            return this;
+        }
+
+        public ISandwich withTomato()
+        {
+            sandwich.Vegetables.Add("Tomato");
+
             return this;
         }
     }
@@ -145,20 +180,12 @@
         // il y a plusieur méthode de le définir
         public void MakeSandwich(ISandwich sandwichBuilder)
         {
-            List<string> vegetables = new List<string>() { "Tomato", "Lettuce" };
-            List<string> condiments = new List<string>() { "Mayo" };
-            // on peut le définir  avec des get set
-            sandwichBuilder.SetBread("white bread");
-            sandwichBuilder.SetMeat("Turkey");
-            sandwichBuilder.SetCheese("Cheddar");
-            sandwichBuilder.SetVegetables(vegetables);
-            sandwichBuilder.SetCondiments(condiments);
+            sandwichBuilder.withWhiteBread().withHam().withCheddar().withTomato().withMayo();
         }
 
-        public void MakeSandwich2(ISandwich sandwichBuilder)
+        public void MakeSandwichTurkey(ISandwich sandwichBuilder)
         {
-            // ou un peux utiliser des fonctions qui retourne des les élements du sandwich
-            sandwichBuilder.withWhiteBread().withHam().withCheddar().withTomato().withMayo().withKetchup();
+            sandwichBuilder.withWhiteBread().withTurkey().withCheddar().withTomato().withOnions().withMayo().withKetchup();
         }
     }
 
@@ -166,24 +193,24 @@
     {
         var sandwichMaker = new Cook();
         var SandwichBuilder = new SandwichBuilder();
+        var SandwichBuilder2 = new SandwichBuilder2();
         sandwichMaker.MakeSandwich(SandwichBuilder);
-        sandwichMaker.MakeSandwich2(SandwichBuilder);
-        var sandwichTurkey = SandwichBuilder.GetSandwich();
+        sandwichMaker.MakeSandwichTurkey(SandwichBuilder2);
+        Console.WriteLine("Ham Sandwich:");
+        Console.WriteLine($"Bread: {SandwichBuilder.GetSandwich().Bread}");
+        Console.WriteLine($"Meat: {SandwichBuilder.GetSandwich().Meat}");
+        Console.WriteLine($"Cheese: {SandwichBuilder.GetSandwich().Cheese}");
+        Console.WriteLine($"Vegetables: {string.Join(", ", SandwichBuilder.GetSandwich().Vegetables)}");
+        Console.WriteLine($"Condiments: {string.Join(", ", SandwichBuilder.GetSandwich().Condiments)}\n");
+
+        sandwichMaker.MakeSandwichTurkey(SandwichBuilder);
 
         // sandwich à la dinde
-        Console.WriteLine("Turkey sandwich:");
-        Console.WriteLine($"Bread: {sandwichTurkey.Bread}");
-        Console.WriteLine($"Meat: {sandwichTurkey.Meat}");
-        Console.WriteLine($"Cheese: {sandwichTurkey.Cheese}");
-        Console.WriteLine($"Vegetables: {string.Join(", ", sandwichTurkey.Vegetables)}");
-        Console.WriteLine($"Condiments: {string.Join(", ", sandwichTurkey.Condiments)}\n");
-
-        // sandwich au jambon
-        Console.WriteLine("Ham sandwich:");
-        Console.WriteLine($"Bread: {SandwichBuilder.GetSandwich2().Bread}");
-        Console.WriteLine($"Meat: {SandwichBuilder.GetSandwich2().Meat}");
-        Console.WriteLine($"Cheese: {SandwichBuilder.GetSandwich().Cheese}");
-        Console.WriteLine($"Vegetables: {string.Join(", ", SandwichBuilder.GetSandwich2().Vegetables)}");
-        Console.WriteLine($"Condiments: {string.Join(", ", SandwichBuilder.GetSandwich2().Condiments)}");
+        Console.WriteLine("Turkey Sandwich:");
+        Console.WriteLine($"Bread: {SandwichBuilder2.GetSandwich().Bread}");
+        Console.WriteLine($"Meat: {SandwichBuilder2.GetSandwich().Meat}");
+        Console.WriteLine($"Cheese: {SandwichBuilder2.GetSandwich().Cheese}");
+        Console.WriteLine($"Vegetables: {string.Join(", ", SandwichBuilder2.GetSandwich().Vegetables)}");
+        Console.WriteLine($"Condiments: {string.Join(", ", SandwichBuilder2.GetSandwich().Condiments)}\n");
     }
 }
